@@ -45,12 +45,15 @@ class User extends Authenticatable implements JWTSubject{
             'password' => 'hashed',
         ];
     }
-       public function getJWTIdentifier()
-    {
+
+    public function getJWTIdentifier(){
         return $this->getKey();
     }
-        public function getJWTCustomClaims()
-    {
+    public function getJWTCustomClaims(){
         return [];
     }
+
+    public function capsules(){
+    return $this->hasMany(Capsule::class, 'user_id');
+}
 }

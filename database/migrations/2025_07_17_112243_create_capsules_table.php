@@ -6,11 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
+
+    public function up(): void{
         Schema::create('capsules', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
@@ -19,6 +16,7 @@ return new class extends Migration
             $table->string('mood');
             $table->Date('reveal_at');
             $table->boolean('is_public')->default(false);
+            $table->string('country')->nullable();
             $table->ipAddress('ip_address');
             $table->decimal('latitude')->nullable();
             $table->decimal('longitude')->nullable();
@@ -28,11 +26,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
+    public function down(): void{
         Schema::dropIfExists('capsules');
     }
 };
