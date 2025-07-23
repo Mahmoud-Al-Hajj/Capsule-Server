@@ -4,13 +4,15 @@ namespace App\Services\Common;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use LoginRequest;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
+
 
 class AuthService{
 
-    static public function login(Request $request){
+    static public function login(LoginRequest $request){
 
         $credentials = $request->only('email', 'password');
         $token = Auth::attempt($credentials);
@@ -23,7 +25,7 @@ class AuthService{
 
 
     }
-    static function register(Request $request){
+    static function register(RegisterRequest $request){
 
         $user = new User;
         $user->name = $request->name;
@@ -34,7 +36,7 @@ class AuthService{
         $token = Auth::login($user);
 
         $user->token = $token;
-        return $user;
+           return response()->json($user, 201);
     }
 
     static function logout()

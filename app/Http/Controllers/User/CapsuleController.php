@@ -37,7 +37,6 @@ function getCapsulesByUserId($userId) {
     function deleteCapsule($id){
     $capsule = CapsuleService::deleteCapsule($id);
     return $this->responseJSON($capsule,200);
-
 }
 
 }
